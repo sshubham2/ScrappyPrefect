@@ -3,6 +3,9 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from unipath import Path
 
+class COLLECTIONS:
+    COVID_RECORDS = "covid-records"
+    
 def getPath():
     path = Path( os.path.dirname(os.path.abspath(__file__)))
     p = path.parent.parent + "/environment/serviceAccount.json"

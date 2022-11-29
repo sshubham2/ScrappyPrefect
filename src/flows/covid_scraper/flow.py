@@ -3,7 +3,7 @@ from lxml import html
 from datetime import datetime
 import requests
 import pandas as pd
-from src.config.firestore import db
+from src.config.firestore import db, COLLECTIONS
 from src.config.context_vars import settings, ENV_VARS
 from src.flows.covid_scraper.utils import *
 
@@ -23,7 +23,7 @@ def get_india_covid_date(_url: str):
 def load_data(df: pd.DataFrame):
    records = df.to_dict('records')
    for record in records:
-      db.collection('covid-records').add(record)
+      db.collection(COLLECTIONS.COVID_RECORDS).add(record)
 
 @prefect.flow()
 def main():
