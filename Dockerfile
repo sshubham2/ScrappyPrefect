@@ -1,6 +1,6 @@
 FROM prefecthq/prefect:latest-python3.9
 ARG prefect_secret
-ARG prefect_url
+ARG workspace
 
 RUN apt update -y
 RUN apt install -y gcc libpq-dev python3-dev liblzma-dev
@@ -8,12 +8,10 @@ RUN apt install -y gcc libpq-dev python3-dev liblzma-dev
 COPY requirements.txt requirements.txt
 
 RUN pip install -r requirements.txt
-RUN prefect config set PREFECT_API_URL=${prefect_url}
-RUN prefect config set PREFECT_API_KEY==${prefect_secret}
-RUN python deployment.py
+RUN prefect cloud login --key ${prefect_secret} --workspace ${workspace}
 
 COPY . /prefect-flows
 WORKDIR /prefect-flows
 
 ENV PYTHONPATH=/prefect-flows
-CMD ["prefect", "agent", "start", "-q", "test"]
+CMD ["python", "deployment.py", "&&", "prefect", "agent", "start", "-q", "test"]
