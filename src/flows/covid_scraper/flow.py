@@ -26,10 +26,7 @@ def load_data(df: pd.DataFrame):
       db.collection(COLLECTIONS.COVID_RECORDS).add(record)
 
 @prefect.flow()
-def main():
+def track_covid_data():
    df = get_india_covid_date(settings[ENV_VARS.COVID_SCRAPE_URL])
    load_data(df)
-   
-if __name__ == '__main__':    
-    main()
 
