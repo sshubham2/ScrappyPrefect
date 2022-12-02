@@ -7,6 +7,6 @@ To run agent:
 1. Login to prefect.io
 2. Ask workspace access.
 3. Create prefect API key.
-4. In local machine, prefect cloud login -k <keyname> --workspace <workspacename>
+4. In local machine, prefect cloud login -k < keyname > --workspace < workspacename >
 5. Then, run prefect agent start -q <queue_name>
 6. Run tasks by going to prefect.io workspace.
