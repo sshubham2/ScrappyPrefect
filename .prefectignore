@@ -1,0 +1,6 @@
+*.txt
+*.md
+*.pyc
+.gitignore
+deployment.py
+/.git
